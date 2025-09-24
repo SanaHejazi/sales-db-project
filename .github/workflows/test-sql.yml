@@ -8,6 +8,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:15
@@ -33,12 +34,12 @@ jobs:
       - name: Install PostgreSQL client
         run: sudo apt-get install -y postgresql-client
 
-      - name: Run schema.sql
-        run: psql -h localhost -U admin -d sales_db -f sql/schema.sql
+      - name: Run DDL.sql
+        run: psql -h localhost -U admin -d sales_db -f docs/DDL.sql
         env:
           PGPASSWORD: secret123
 
-      - name: Run data.sql
-        run: psql -h localhost -U admin -d sales_db -f sql/data.sql
+      - name: Run Data.sql
+        run: psql -h localhost -U admin -d sales_db -f docs/Data.sql
         env:
           PGPASSWORD: secret123
